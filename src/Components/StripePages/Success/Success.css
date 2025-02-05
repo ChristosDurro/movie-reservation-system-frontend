@@ -1,0 +1,24 @@
+
+.success-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 100px;
+	width: 90%;
+	margin: 150px auto;
+	color: #eaeaea;
+}
+
+.success-container > a {
+	color: #eaeaea;
+	text-decoration: none;
+	font-size: 1.75rem;
+	border: 1px solid #eaeaea;
+	padding: 15px 20px;
+	cursor: default;
+}
+
+.success-container > a:hover {
+	cursor: pointer;
+	background-color: #2d2547;
+}

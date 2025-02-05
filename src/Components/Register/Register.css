@@ -1,0 +1,33 @@
+
+.register-form {
+	width: 400px;
+	margin: 100px auto 0;
+	color: #eaeaea;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.name-box {
+	display: flex;
+	gap: 30px;
+}
+
+
+.submit-register {
+	padding: 20px 15px;
+	background-color: inherit;
+	border: 1px solid #eaeaea;
+	color: #eaeaea;
+	font-size: 1.4rem;
+	width: 50%;
+	margin: 20px auto 0;
+}
+
+.submit-register:hover {
+	background-color: #eaeaea;
+	color: rgb(58, 48, 95);
+	border: 1px solid rgb(58, 48, 95);
+	cursor: pointer;
+	transition: .5s;
+}

@@ -1,0 +1,77 @@
+
+.movie-ticket-display {
+	padding: 15px 25px;
+	border: 1px solid black;
+	border-bottom: none;
+	border-top-right-radius: 16px;
+	border-top-left-radius: 16px;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	justify-content: space-between;
+	height: 100px;
+	width: 95%;
+	font-size: 1.5rem;
+	background-color: #eaeaea;
+	color: #111;
+}
+
+.movie-ticket-info {
+	
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	height: 100%;
+}
+
+.movie-ticket-info > hr {
+	height: 100%;
+	border: 1px solid #999;
+}
+
+.movie-ticket-img {
+	width: 50px;
+	display: flex;
+}
+
+.movie-ticket-img > img {
+	width: 100%;
+}
+
+.movie-ticket-checkout-btn {
+	height: 100px;
+	border-top: none;
+	border-bottom: none;
+	border-right: none;
+	border-top-right-radius: 16px;
+	padding: 25px;
+	position: absolute;
+	right: 0;
+	background-color: #b4b4b4;
+	color: #111;
+	font-size: 1.25rem;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.movie-ticket-checkout-btn:hover {
+	cursor: pointer;
+	background-color: #979797;
+}
+
+.movie-ticket-checkout-btn.disabled {
+	pointer-events: none;
+	opacity: .7;
+}
+
+.disabled:hover {
+	background-color: #b4b4b4;
+}
+
+.arrow-right-btn {
+	margin-left: 10px;
+}

@@ -1,0 +1,99 @@
+.nav-container {
+	display: flex;
+	justify-content: space-between;
+	width: 90%;
+	margin: auto;
+	padding: 25px;
+	color: #eaeaea;
+	border-bottom: 1px solid;
+}
+
+.logo, 
+.nav-link {
+	
+	color: #eaeaea;
+	letter-spacing: 1px;
+	font-size: 2rem;
+	text-decoration: none;
+}
+
+.nav-links {
+	display: flex;
+	align-items: center;
+	gap: 25px;	
+}
+
+.nav-link {
+	font-size: 1.4rem;
+}
+
+.nav-link:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.authentication {
+	display: flex;
+	align-items: center;
+}
+
+.word-split {
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+.user-options {
+	background-color: #eaeaea;
+	border-radius: 16px;
+	border: 1px solid black;
+	padding: 20px;
+	position: absolute;
+	right: 25px;
+	top: 100px;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	z-index: 99;
+}
+
+.user-options::after {
+	content: "";
+	width: 0px;
+	height: 0px;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid #eaeaea;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	position: absolute;
+	bottom: 100%;
+	left: 65%;
+	margin-left: -20px;
+}
+
+.user-option-links {
+	color: #333;
+	font-size: 1.25rem;
+	padding: 10px;
+}
+
+.user-option-links:hover {
+	background-color: #333;
+	color: #eaeaea;
+	cursor: pointer;
+	border-radius: 4px;
+	transition: .5s;
+}
+
+.user-options > a {
+	text-decoration: none;
+}
+
+.sign-out {
+	display: flex;
+	align-items: center;
+}
+
+.sign-out-icon {
+	margin-left: 10px;
+}

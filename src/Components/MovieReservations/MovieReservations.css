@@ -1,0 +1,20 @@
+
+.movie-reservations-container {
+	width: 90%;
+	margin: 100px auto;
+	color: #eaeaea;
+}
+
+.movie-reserv-header {
+	margin-left: 25px;
+}
+
+.movie-reserv-display {
+	border: 1px solid #eaeaea;
+	border-radius: 16px;
+	padding: 50px;
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+}

@@ -1,0 +1,85 @@
+
+.movie-page-container {
+	width: 90%;
+	margin: 100px auto 0;
+	color: #eaeaea;
+}
+
+.movie-page-display {
+	display: flex;
+	justify-content: flex-end;
+	gap: 100px;
+	margin-bottom: 100px;
+}
+
+.movie-page-info {
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	letter-spacing: 1px;
+}
+
+.movie-page-title {
+	font-size: 2.5rem;
+	text-decoration: underline;
+}
+
+.movie-page-desc {
+	font-size: 1.25rem;
+}
+
+.movie-genre-info {
+	display: flex;
+	align-items: flex-start;
+	gap: 25px;
+}
+
+.movie-page-genre-text {
+	font-size: 2rem;
+}
+
+.movie-page-genres {
+	width: 100%;
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.movie-page-genre {
+	padding: 10px;
+	border: 1px solid #eaeaea;
+	border-radius: 16px;
+}
+
+.movie-page-duration, .movie-page-release {
+	font-size: 1.75rem;
+}
+
+.movie-page-img {
+	display: flex;
+	justify-content: center;
+}
+
+.movie-page-img > img {
+	width: 80%;
+	border-radius: 4px;
+	border: 1px solid #fff;
+}
+
+
+.movie-page-showtimes {
+	margin-top: 50px;
+}
+
+.showtimes-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+	margin-top: 50px;
+}
+
+.schedule-link {
+	text-decoration: none;
+	color: #eaeaea;
+}

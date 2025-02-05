@@ -1,0 +1,61 @@
+
+.seats-container {
+	width: 90%;
+	margin: 100px auto;
+	color: #eaeaea;
+	letter-spacing: 1px;
+}
+
+.seats-header {
+	text-align: center;
+}
+
+.seats-section {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.seats-box {
+	width: 30%;
+	margin-top: 50px;
+}
+
+.screen-display {
+	position: relative;
+	text-align: center;
+	padding: 10px 0;
+	width: 100%;
+	height: 50px;
+	background-color: #cecece;
+	border: none;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: #111;
+	font-weight: 600;
+  }
+  
+
+.seats-display {
+	display: grid;
+	grid-template-columns:  repeat(2, 1fr) 50px repeat(3, 1fr) 50px repeat(3, 1fr);
+	gap: 10px;
+	width: 100%;
+	margin-top: 50px;
+}
+
+.seats-guide {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.seats-explanation {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+}
+
+.seats-explanation-text {
+	font-size: 1.5rem;
+}

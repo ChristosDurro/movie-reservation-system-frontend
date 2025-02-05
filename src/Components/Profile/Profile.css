@@ -1,0 +1,23 @@
+
+.profile-container {
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	width: 90%;
+	margin: 75px auto;
+	align-items: center;
+	color: #eaeaea;
+	letter-spacing: 1px;
+}
+
+.profile-header {
+	font-size: 2.75rem;
+	text-decoration: underline;
+}
+
+.profile-info {
+	font-size: 1.75rem;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}

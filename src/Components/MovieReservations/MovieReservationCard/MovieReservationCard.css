@@ -1,0 +1,45 @@
+
+.reservation-card {
+	width: 100%;
+	font-size: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	letter-spacing: 1px;
+}
+
+.reserv-details {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+	height: 100px;
+}
+
+.reserv-movie-details {
+	display: flex;
+	gap: 25px;
+	align-items: center;
+}
+
+.reserv-movie-details > img {
+	width: 50px;
+}
+
+.reserv-details > hr {
+	height: 50%;
+	border: 1px solid #999;
+}
+
+.reserv-btn {
+	padding: 15px 25px;
+	background-color: transparent;
+	border: 1px solid #eaeaea;
+	color: #eaeaea;
+	font-size: 1.25rem;
+	letter-spacing: 1px;
+}
+
+.reserv-btn:hover {
+	cursor: pointer;
+	background-color: #2d2547;
+}
