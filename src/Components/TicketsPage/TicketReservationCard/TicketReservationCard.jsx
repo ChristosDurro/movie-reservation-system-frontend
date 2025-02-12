@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./TicketReservationCard.css";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const TicketReservationCard = ({
 	movie,
@@ -15,17 +15,24 @@ const TicketReservationCard = ({
 	seatsSelectedLen,
 	user,
 }) => {
-	const navigate = useNavigate();
-
+	
 	const handleCheckout = (e) => {
 		e.preventDefault();
 
-		console.log("Checkout called");
+		const token = localStorage.getItem("token");
 
-		fetch("http://localhost:8084/create-checkout-session", {
+		
+		if (token == null) {
+			alert("Unathorized access. Please login before procceeding!");
+			window.location.href = "/login";
+			return;
+		}
+
+		fetch("http://localhost:8086/tickets/create-checkout-session", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				"Authorization": `Bearer ${token}`
 			},
 			body: JSON.stringify({
 				userId: user.id,
@@ -35,7 +42,19 @@ const TicketReservationCard = ({
 				ticketQuantity: quantity,
 			}),
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				
+				if (res.status == 401) {
+					localStorage.removeItem("user");
+					localStorage.removeItem("token");
+
+					alert("Token expired. Please login again!");
+					window.location.href = "/login";
+					return Promise.reject("Token expired");
+				}
+
+				return res.json()
+			})
 			.then((data) => {
 				if (data.url) {
 					window.location.href = data.url;
@@ -46,7 +65,6 @@ const TicketReservationCard = ({
 			})
 			.catch((error) => {
 				console.log(error);
-				alert("Something went wrong. Please try again!");
 			});
 	};
 

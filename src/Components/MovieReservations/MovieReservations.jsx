@@ -8,9 +8,32 @@ const MovieReservations = ({ user }) => {
 
 	useEffect(() => {
 		const fetchReservations = (userId) => {
-			fetch(`http://localhost:8085/reservations/${userId}`)
+			const token = localStorage.getItem("token");
+
+			if (token == null) {
+				alert("Unathorized access. Please login before procceeding!");
+				window.location.href = "/login";
+				return;
+			}
+
+			fetch(`http://localhost:8086/reservations/${userId}`, {
+				headers: {
+					"Authorization": `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+			})
 				.then((res) => {
 					console.log(res);
+
+					if (res.status == 401) {
+						localStorage.removeItem("user");
+						localStorage.removeItem("token");
+
+						alert("Token expired. Please login again!");
+						window.location.href = "/login";
+						return Promise.reject("Token Expired");
+					}
+
 					return res.json();
 				})
 				.then((data) => {
@@ -23,17 +46,20 @@ const MovieReservations = ({ user }) => {
 		fetchReservations(user.id);
 	}, []);
 
-	console.log(user);
-
 	return (
 		<div className="movie-reservations-container">
 			<h1 className="movie-reserv-header">Movie Reservations</h1>
 			<ul className="movie-reserv-display">
-				{
-					ticketReservations.map((reservation, i) => {
-						return <MovieReservationCard key={i} reservation={reservation} setTicketReservations={setTicketReservations} userId={user.id} />
-					})
-				}
+				{ticketReservations && ticketReservations.map((reservation, i) => {
+					return (
+						<MovieReservationCard
+							key={i}
+							reservation={reservation}
+							setTicketReservations={setTicketReservations}
+							userId={user.id}
+						/>
+					);
+				})}
 			</ul>
 		</div>
 	);

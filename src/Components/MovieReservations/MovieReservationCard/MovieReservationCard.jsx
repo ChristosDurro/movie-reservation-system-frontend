@@ -11,11 +11,6 @@ const MovieReservationCard = ({
 	const { movie, schedule, seat, ticketId } = reservation;
 	const [openModal, setOpenModal] = useState(false);
 
-	console.log(movie);
-	console.log(schedule);
-	console.log(seat);
-	console.log(ticketId);
-
 	const localDateTime = schedule.showtime;
 	const date = new Date(localDateTime);
 
@@ -83,10 +78,20 @@ const MovieReservationCard = ({
 	const formattedTime = `${hour}:${minutes < 10 ? "0" + minutes : minutes}`;
 
 	const handleReservCancelClick = () => {
+
+		const token = localStorage.getItem("token");
+
+		if (token == null) {
+			alert("Unathorized access. Please login before procceeding!");
+			window.location.href = "/login";
+			return;
+		}
+
 		setOpenModal(false);
-		fetch("http://localhost:8085/reservation/cancel", {
+		fetch("http://localhost:8086/reservations/cancel", {
 			method: "POST",
 			headers: {
+				"Authorization": `Bearer ${token}`,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
@@ -99,6 +104,17 @@ const MovieReservationCard = ({
 		})
 			.then((res) => {
 				console.log(res);
+
+				
+				if (res.status == 401) {
+					localStorage.removeItem("user");
+					localStorage.removeItem("token");
+
+					alert("Token expired. Please login again!");
+					window.location.href = "/login";
+					return;
+				}
+
 				return res.json();
 			})
 			.then((data) => {

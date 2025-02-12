@@ -2,8 +2,6 @@
 import { useEffect, useState } from "react";
 import "./TicketsPage.css";
 import { useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import TicketReservationCard from "./TicketReservationCard/TicketReservationCard";
 
 const TicketsPage = () => {
@@ -22,8 +20,35 @@ const TicketsPage = () => {
 
 	useEffect(() => {
 		const fetchSchedule = (scheduleId) => {
-			fetch(`http://localhost:8082/schedules/${scheduleId}`)
-				.then((res) => res.json())
+			const token = localStorage.getItem("token");
+
+			if (token == null) {
+				alert("Unathorized access. Please login before procceeding!");
+				window.location.href = "/login";
+				return;
+			}
+
+			fetch(`http://localhost:8086/schedules/${scheduleId}`, {
+				headers: {
+					Authorization: `bearer ${token}`,
+				},
+			})
+				.then((res) => {
+					console.log(res);
+
+					if (res.status == 401) {
+						localStorage.removeItem("user");
+						localStorage.removeItem("token");
+
+						alert(
+							"Token is invalid or expired. Please log in again!"
+						);
+						window.location.href = "/login";
+						return Promise.reject("Token Expired.");
+					}
+
+					return res.json();
+				})
 				.then((data) => setSchedule(data))
 				.catch((error) => console.log(error));
 		};
@@ -33,7 +58,7 @@ const TicketsPage = () => {
 
 	useEffect(() => {
 		const fetchMovie = (movieId) => {
-			fetch(`http://localhost:8080/movies/${movieId}`)
+			fetch(`http://localhost:8086/movies/${movieId}`)
 				.then((res) => res.json())
 				.then((data) => setMovie(data))
 				.catch((error) => console.log(error));
@@ -147,7 +172,16 @@ const TicketsPage = () => {
 					</p>
 				</div>
 			</div>
-			<TicketReservationCard movie={movie} formattedDateInfo={formattedDateInfo} schedule={schedule} quantity={quantity} message="Next" url={`/movies/${movie?.title.toLowerCase()}/${schedule?.id}/seats?quantity=${quantity}`} />
+			<TicketReservationCard
+				movie={movie}
+				formattedDateInfo={formattedDateInfo}
+				schedule={schedule}
+				quantity={quantity}
+				message="Next"
+				url={`/movies/${movie?.title.toLowerCase()}/${
+					schedule?.id
+				}/seats?quantity=${quantity}`}
+			/>
 		</div>
 	);
 };

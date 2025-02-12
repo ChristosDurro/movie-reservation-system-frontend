@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({setIsLoggedIn}) => {
+const Login = ({ setIsLoggedIn }) => {
 	const [identifier, setIdentifier] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +24,7 @@ const Login = ({setIsLoggedIn}) => {
 			return;
 		}
 
-		fetch("http://localhost:8081/login", {
+		fetch("http://localhost:8086/users/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -32,7 +32,10 @@ const Login = ({setIsLoggedIn}) => {
 			body: JSON.stringify(formData),
 		})
 			.then((response) => {
-				if (!response.ok) alert("Wrong credentials. Please try again!");
+				if (!response.ok) {
+					alert("Wrong credentials. Please try again!");
+					return Promise.reject("Wrong credentials");
+				}
 
 				return response.json();
 			})
@@ -43,7 +46,6 @@ const Login = ({setIsLoggedIn}) => {
 				localStorage.setItem("user", JSON.stringify(data.user));
 
 				setIsLoggedIn(true);
-				// console.log(JSON.parse(localStorage.getItem("user")));
 
 				navigate("/");
 			})

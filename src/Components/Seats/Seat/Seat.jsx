@@ -44,8 +44,31 @@ const Seat = ({
 	];
 
 	const handleSeatSelection = (id) => {
-		fetch(`http://localhost:8083/seats/schedule/${scheduleId}`)
-			.then((res) => res.json())
+		const token = localStorage.getItem("token");
+
+		if (token == null) {
+			alert("Unathorized access. Please login before procceeding!");
+			window.location.href = "/login";
+			return;
+		}
+
+		fetch(`http://localhost:8086/seats/schedule/${scheduleId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+			.then((res) => {
+				if (res.status == 401) {
+					localStorage.removeItem("user");
+					localStorage.removeItem("token");
+
+					alert("Token expired. Please login again!");
+					window.location.href = "/login";
+					return Promise.reject("Token Expired!");
+				}
+
+				return res.json();
+			})
 			.then((data) => {
 				// Find the seat the user clicked on
 				const clickedSeat = data.find((seat) => seat.id === id);

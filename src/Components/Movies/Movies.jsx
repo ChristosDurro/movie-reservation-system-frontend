@@ -10,7 +10,8 @@ const Movies = () => {
 
 	useEffect(() => {
 		const getMovies = () => {
-			fetch("http://localhost:8080/movies")
+
+			fetch("http://localhost:8086/movies")
 				.then((res) => {
 					if (!res.ok) {
 						setErrorMessage(
@@ -41,7 +42,9 @@ const Movies = () => {
 							<Link
 								className="movie-card-link"
 								key={movie.id}
-								to={`/movies/${movie.id}/${movie.title.toLowerCase()}`}
+								to={`/movies/${
+									movie.id
+								}/${movie.title.toLowerCase()}`}
 							>
 								<MovieCard movie={movie} />
 							</Link>

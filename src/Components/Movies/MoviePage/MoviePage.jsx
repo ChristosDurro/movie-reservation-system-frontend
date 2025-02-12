@@ -4,7 +4,7 @@ import "./MoviePage.css";
 import { useEffect, useState } from "react";
 import ScheduleCard from "../ScheduleCard/ScheduleCard";
 
-const MoviePage = ({loggedIn}) => {
+const MoviePage = ({ loggedIn }) => {
 	const { id, title } = useParams();
 	const [movie, setMovie] = useState(null);
 	const [schedules, setSchedules] = useState(null);
@@ -14,7 +14,7 @@ const MoviePage = ({loggedIn}) => {
 
 	useEffect(() => {
 		const fetchMovie = (id) => {
-			fetch(`http://localhost:8080/movies/${id}`)
+			fetch(`http://localhost:8086/movies/${id}`)
 				.then((res) => res.json())
 				.then((data) => setMovie(data))
 				.catch((error) => {
@@ -24,8 +24,10 @@ const MoviePage = ({loggedIn}) => {
 		};
 
 		const fetchSchedules = (movieId) => {
-			fetch(`http://localhost:8082/schedules/movie/${movieId}`)
-				.then((res) => res.json())
+			fetch(`http://localhost:8086/schedules/movie/${movieId}`)
+				.then((res) => {
+					return res.json();
+				})
 				.then((data) => setSchedules(data))
 				.catch((error) => console.log(error));
 		};
@@ -40,7 +42,7 @@ const MoviePage = ({loggedIn}) => {
 			alert("You need to log in to continue!");
 			navigate("/login");
 		}
-	}
+	};
 
 	return (
 		<div className="movie-page-container">
@@ -86,18 +88,21 @@ const MoviePage = ({loggedIn}) => {
 					<div className="movie-page-showtimes">
 						<h1 className="showtimes-header">Movie Showtimes:</h1>
 						<ul className="showtimes-list">
-							{schedules !== null && schedules.map((schedule) => {
-								return (
-									<Link
-										key={schedule.id}
-										to={`/movies/${movie.title.toLowerCase()}/${schedule.id}/tickets`}
-										className="schedule-link"
-										onClick={handleScheduleLink}
-									>
-										<ScheduleCard schedule={schedule} />
-									</Link>
-								);
-							})}
+							{schedules !== null &&
+								schedules.map((schedule) => {
+									return (
+										<Link
+											key={schedule.id}
+											to={`/movies/${movie.title.toLowerCase()}/${
+												schedule.id
+											}/tickets`}
+											className="schedule-link"
+											onClick={handleScheduleLink}
+										>
+											<ScheduleCard schedule={schedule} />
+										</Link>
+									);
+								})}
 						</ul>
 					</div>
 				</div>

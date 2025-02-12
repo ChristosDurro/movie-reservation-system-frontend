@@ -42,10 +42,10 @@ const ScheduleCard = ({ schedule }) => {
 
 	return (
 		<div className="schedule-card">
-			{/* <div className="showtime-date"> */}
-				<p className="showtime-day-name">{dayString}</p>
-				<p className="showtime-day">{day} {monthString.substring(0, 3)}.</p>
-			{/* </div> */}
+			<p className="showtime-day-name">{dayString}</p>
+			<p className="showtime-day">
+				{day} {monthString.substring(0, 3)}.
+			</p>
 			<p className="showtime-hour">{formattedTime}</p>
 		</div>
 	);

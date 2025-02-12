@@ -25,9 +25,30 @@ const Seats = () => {
 
 	// fetch seats and schedule from scheduleId
 	useEffect(() => {
+		const token = localStorage.getItem("token");
+
+		if (token == null) {
+			alert("Unathorized access. Please login before procceeding!");
+			window.location.href = "/login";
+			return;
+		}
+
 		const fetchSeats = (scheduleId) => {
-			fetch(`http://localhost:8083/seats/schedule/${scheduleId}`)
-				.then((res) => res.json())
+			fetch(`http://localhost:8086/seats/schedule/${scheduleId}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+				.then((res) => {
+					if (res.status == 401) {
+						localStorage.clear();
+						alert("Token expired. Please login again!");
+						window.location.href = "/login";
+						return Promise.reject("Expired Token");
+					}
+
+					return res.json();
+				})
 				.then((data) => setSeats(data))
 				.catch((error) => {
 					setErrorMessage("Something went wrong. Please try again!");
@@ -36,8 +57,22 @@ const Seats = () => {
 		};
 
 		const fetchSchedule = (scheduleId) => {
-			fetch(`http://localhost:8082/schedules/${scheduleId}`)
-				.then((res) => res.json())
+			fetch(`http://localhost:8086/schedules/${scheduleId}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+				.then((res) => {
+				
+					if (res.status == 401) {
+						localStorage.clear();
+						alert("Token expired. Please login again!");
+						window.location.href = "/login";
+						return Promise.reject("Expired Token");
+					}
+
+					return res.json()
+				})
 				.then((data) => setSchedule(data))
 				.catch((error) => console.log(error));
 		};
@@ -50,7 +85,7 @@ const Seats = () => {
 	// fetch movie from scheduleId
 	useEffect(() => {
 		const fetchMovie = (movieId) => {
-			fetch(`http://localhost:8080/movies/${movieId}`)
+			fetch(`http://localhost:8086/movies/${movieId}`)
 				.then((res) => res.json())
 				.then((data) => setMovie(data))
 				.catch((error) => console.log(error));
@@ -108,8 +143,6 @@ const Seats = () => {
 			});
 		}
 	}, [schedule]);
-
-	console.log(user, "quantity: " + quantity);
 
 	return (
 		<div className="seats-container">
